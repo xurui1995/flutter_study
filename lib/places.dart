@@ -10,25 +10,25 @@ import 'package:http/http.dart' as http;
 
 const key = '';
 
-class Place {
+class Restaurant {
   final String name;
   final double rating;
   final String address;
 
 
-  Place.fromJson(Map jsonMap)
+  Restaurant.fromJson(Map jsonMap)
       : name = jsonMap['name'],
         rating = jsonMap['rating'].toDouble(),
         address = jsonMap['vicinity'];
 }
 
 
-Future<Stream<Place>> getPlaces() {
+Future<Stream<Restaurant>> getPlaces() {
   return key.length > 0 ? getPlacesFromNetwork() : getPlacesFromAsset();
 }
 
 
-Future<Stream<Place>> getPlacesFromNetwork() async {
+Future<Stream<Restaurant>> getPlacesFromNetwork() async {
   var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
   var client = new http.Client();
   var streamedRes = await client.send(new http.Request('get', Uri.parse(url)));
@@ -37,13 +37,13 @@ Future<Stream<Place>> getPlacesFromNetwork() async {
       .transform(UTF8.decoder)
       .transform(JSON.decoder)
       .expand((jsonBody) => (jsonBody as Map)['results'])
-      .map((jsonPlace) => new Place.fromJson(jsonPlace));
+      .map((jsonPlace) => new Restaurant.fromJson(jsonPlace));
 }
 
 
-Future<Stream<Place>> getPlacesFromAsset() async {
+Future<Stream<Restaurant>> getPlacesFromAsset() async {
   return new Stream.fromFuture(rootBundle.loadString('assets/places.json'))
       .transform(json.decoder)
       .expand((jsonBody) => (jsonBody as Map)['results'])
-      .map((jsonPlace) => new Place.fromJson(jsonPlace));
+      .map((jsonPlace) => new Restaurant.fromJson(jsonPlace));
 }

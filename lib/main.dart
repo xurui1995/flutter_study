@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'places.dart';
 import 'ItemDetailPage.dart';
+import 'SpecialItemsPage.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,16 +14,15 @@ import 'dart:developer';
 
 void main() {
   // debugPaintSizeEnabled = true;
-  runApp(
-      new MyApp()
-  );
+  print("main() start");
+  runApp(new MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter学习',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -35,18 +36,19 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
 
-
-
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Place> _places = <Place>[];
+  List<Restaurant> _restaurants = <Restaurant>[];
 
-  var phone ='';
+  List<Restaurant> _goodRestaurants = <Restaurant>[];
+  List<Restaurant> _badRestaurants = <Restaurant>[];
+
+  var phone = '';
   static const CHANNEL_PACKAGE =
-  const MethodChannel('xur.flutter.io/first_flutter');
+      const MethodChannel('xur.flutter.io/first_flutter');
 
   Future<Null> _getPhoneMsg() async {
     try {
@@ -76,7 +78,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void listenForPlaces() async {
     var stream = await getPlaces();
-    stream.listen((place) => setState(() => _places.add(place)));
+    stream.listen((restaurant) => setState(() => _restaurants.add(restaurant)));
+  }
+
+  Future<Null> _handleRefresh() async {
+    // 模拟刷新数据
+    await new Future.delayed(new Duration(seconds: 3));
+    setState(() {});
   }
 
   @override
@@ -87,52 +95,60 @@ class _MyHomePageState extends State<MyHomePage> {
           leading: new Icon(Icons.fastfood),
         ),
         body: new Builder(builder: (BuildContext context) {
-         return new Center(
-              child: new ListView(
-                  children: _places.map(
-                          (place) =>
-                      new Dismissible(
-                          key: new Key(place.name),
-                          onDismissed: (direction)
-                          {
-                            _places.remove(place);
-                            if (direction == DismissDirection.startToEnd) {
-                              Scaffold
-                                  .of(context)
-                                  .showSnackBar(new SnackBar(content: new Text("好吃！！！")));
-                              _addSpList('nice_food_list', place.name);
-                            } else {
-                              Scaffold
-                                  .of(context)
-                                  .showSnackBar(new SnackBar(content: new Text("难吃！！拉黑！")));
-                              _addSpList('black_list', place.name);
-                            }
+          return new Center(
+              child: new RefreshIndicator(
+                  child: new ListView(
+                      children: _restaurants
+                          .map((restaurant) => new Dismissible(
+                              key: new Key(restaurant.name),
+                              onDismissed: (direction) {
+                                _restaurants.remove(restaurant);
+                                if (direction == DismissDirection.startToEnd) {
+                                  Scaffold.of(context).showSnackBar(
+                                      new SnackBar(content: new Text("好吃！！！")));
+                                  _addSpList('nice_food_list', restaurant.name);
 
-                          },
-                          background: new Container(
-                            color: Colors.green,
-                          ),
-                          secondaryBackground: new Container(color: Colors.red),
-                          child: new ListTile(
-                              title: new Text(place.name),
-                              subtitle: new Text(place.address),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  new MaterialPageRoute(
-                                    builder: (context) {
-                                      return new ItemDetailPage(title:place.name);
-                                    },
-                                  ),
-                                );
+                                  if (!_goodRestaurants.contains(restaurant)) {
+                                    _goodRestaurants.add(restaurant);
+                                  }
+                                } else {
+                                  Scaffold.of(context).showSnackBar(
+                                      new SnackBar(
+                                          content: new Text("难吃！！拉黑！")));
+                                  _addSpList('black_list', restaurant.name);
+
+                                  if (!_badRestaurants.contains(restaurant)) {
+                                    _badRestaurants.add(restaurant);
+                                  }
+                                }
                               },
-                              leading: new CircleAvatar(
-                                  child: new Text(place.rating.toString()),
-                                  backgroundColor: getColor(place.rating))))
-                  ).toList()
-              ));
+                              background: new Container(
+                                color: Colors.green,
+                              ),
+                              secondaryBackground:
+                                  new Container(color: Colors.red),
+                              child: new ListTile(
+                                  title: new Text(restaurant.name),
+                                  subtitle: new Text(restaurant.address),
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      new MaterialPageRoute(
+                                        builder: (context) {
+                                          return new ItemDetailPage(
+                                              title: restaurant.name);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  leading: new CircleAvatar(
+                                      child: new Text(
+                                          restaurant.rating.toString()),
+                                      backgroundColor:
+                                          getColor(restaurant.rating)))))
+                          .toList()),
+                  onRefresh: _handleRefresh));
         }),
         endDrawer: new Drawer(
-
           child: new ListView(
             children: <Widget>[
               new UserAccountsDrawerHeader(
@@ -152,7 +168,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-
               new ListTile(
                   leading: new Icon(
                     Icons.thumb_down,
@@ -161,11 +176,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: new Text('黑名单'),
                   trailing: new Icon(Icons.arrow_right),
                   onTap: () {
-                    //debugDumpRenderTree();
-                    //debugger();
-                    //_startSecondActivity();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                      new MaterialPageRoute(
+                        builder: (context) {
+                          print(_badRestaurants);
+                          return new SpecialItemsPage(
+                              title: '黑名单', list: _badRestaurants);
+                        },
+                      ),
+                    );
                   }),
-
               new ListTile(
                   leading: new Icon(
                     Icons.favorite,
@@ -173,18 +194,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   title: new Text('好吃的店'),
                   trailing: new Icon(Icons.arrow_right),
-                  onTap: () {}),
-
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                      new MaterialPageRoute(
+                        builder: (context) {
+                          print(_badRestaurants);
+                          return new SpecialItemsPage(
+                              title: '好吃的店', list: _goodRestaurants);
+                        },
+                      ),
+                    );
+                  }),
               new Divider(),
               new ListTile(
-                leading: new Icon(
-                  Icons.exit_to_app,
-                  color: Colors.blue[500],
-                ),
-                title: new Text('安全退出'),
-                trailing: new Icon(Icons.cancel),
-                onTap: () => Navigator.of(context).pop(),
-              ),
+                  leading: new Icon(
+                    Icons.exit_to_app,
+                    color: Colors.blue[500],
+                  ),
+                  title: new Text('安全退出'),
+                  trailing: new Icon(Icons.cancel),
+                  onTap: () {
+                    //退出
+                    exit(0);
+                  }),
             ],
           ),
         ),
@@ -204,28 +237,23 @@ class _MyHomePageState extends State<MyHomePage> {
     return Color.lerp(Colors.red, Colors.green, rating / 5);
   }
 
-
   _getSpList(String spKey) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> list = prefs.getStringList(spKey);
     return list;
   }
 
-  void _addSpList(String spKey,String value) async {
+  // Sp的使用
+  void _addSpList(String spKey, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var list = prefs.getStringList(spKey);
-    if(list == null) {
+    if (list == null) {
       list = new List();
     }
-    if(!list.contains(value)) {
-      list.add(value);
-    }
-    prefs.setStringList(spKey, list);
     print(list);
+    if (!list.contains(value)) {
+      list.add(value);
+      prefs.setStringList(spKey, list);
+    }
   }
 }
-
-
-
-
-

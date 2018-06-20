@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ItemDetailPage extends StatefulWidget {
@@ -7,10 +6,10 @@ class ItemDetailPage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _DetailHomePageState createState() => new _DetailHomePageState();
 }
 
-class _MyHomePageState extends State<ItemDetailPage> {
+class _DetailHomePageState extends State<ItemDetailPage> {
   @override
   Widget build(BuildContext context) {
     var titleText = new Container(
