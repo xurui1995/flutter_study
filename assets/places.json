@@ -1,0 +1,127 @@
+{
+  "html_attributions" : [],
+  "results" : [
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "宴羊楼",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 3.8,
+      "vicinity" : "上海市浦东新区碧波路635号102—1F27C"
+    },
+
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "吉野家",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 2.8,
+      "vicinity" : "自由贸易试验区碧波路635号1幢102-1F15B室"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "快乐柠檬",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 3.5,
+      "vicinity" : "上海市浦东新区张江镇百业路229号"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "老王水果大卖场",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 2.1,
+      "vicinity" : "上海市奉贤区庄行镇东街150号10幢124"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "龙虾烧烤城",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 1.0,
+      "vicinity" : "32 The Promenade, Sydney"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "嘛哩嘛哩烫",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 4.1,
+      "vicinity" : "浦东新区碧波路635号106-1F08-01A室"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "三米粥铺(万科翡翠店)",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 4.5,
+      "vicinity" : "上海市浦东新区张江镇百业路256号1层"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "桂林米粉",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 1.8,
+      "vicinity" : "上海市浦东新区张江镇高斯路1270号一层"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "杨国福麻辣烫",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 4.8,
+      "vicinity" : "自由贸易试验区碧波路635号201-2F09室"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "玛格萝妮餐厅",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 5.0,
+      "vicinity" : "上海市浦东新区张江镇金科路3057号SHZJ-1002"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "肯德基宅急送",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 3.4,
+      "vicinity" : "上海市浦东新区张家路625号一层B座"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "成都冒菜",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 4.0,
+      "vicinity" : "上海市浦东新区张江镇华佗路528号1层-1"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "棒约翰比萨",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 4.1,
+      "vicinity" : "上海市张江高科技园区碧波路635号1F01室"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "桃千鸟",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 0.8,
+      "vicinity" : "上海市浦东新区张江镇益江路135弄5号102室"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "华越楼(汇智店)",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 3.8,
+      "vicinity" : "金科路3057号汇智商业中心5F（C5-1、C5-2）室"
+    }
+  ],
+  "status" : "OK"
+}
