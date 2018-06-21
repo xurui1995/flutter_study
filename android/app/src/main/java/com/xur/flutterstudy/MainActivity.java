@@ -1,5 +1,6 @@
 package com.xur.flutterstudy;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,10 +24,18 @@ public class MainActivity extends FlutterActivity {
             if (methodCall.method.equals("getPhoneMsg")) {
                 Log.d("MainActivity","getPhoneMsg");
                 result.success(Build.MODEL);
-            } else {
+            } else if(methodCall.method.equals("startSecondActivity")) {
+                Log.d("MainActivity","startSecondActivity");
+                startSecondActivity();
+            }else {
                 result.notImplemented();
             }
         }
     });
+  }
+
+  private void startSecondActivity(){
+      Intent i = new Intent(MainActivity.this, SecondActivity.class);
+      startActivity(i);
   }
 }

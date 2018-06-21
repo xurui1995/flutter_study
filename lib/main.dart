@@ -40,7 +40,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   List<Restaurant> _restaurants = <Restaurant>[];
 
   List<Restaurant> _goodRestaurants = <Restaurant>[];
@@ -49,6 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
   var phone = '';
   static const CHANNEL_PACKAGE =
       const MethodChannel('xur.flutter.io/first_flutter');
+
+  AnimationController controller;
+  Animation<double> animation;
 
   Future<Null> _getPhoneMsg() async {
     try {
@@ -74,6 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // _places = new List.generate(100, (i)=>'Restaurant $i');
     _getPhoneMsg();
     listenForPlaces();
+
+    controller = new AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    animation = new Tween(begin: 20.0, end: 300.0).animate(controller);
   }
 
   void listenForPlaces() async {
@@ -91,7 +99,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text(widget.title),
+          title: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Text(widget.title),
+              new Text(
+                '左滑拉黑 右滑收藏',
+                style: new TextStyle(fontSize: 12.0),
+              )
+            ],
+          ),
           leading: new Icon(Icons.fastfood),
         ),
         body: new Builder(builder: (BuildContext context) {
@@ -209,6 +226,26 @@ class _MyHomePageState extends State<MyHomePage> {
               new Divider(),
               new ListTile(
                   leading: new Icon(
+                    Icons.flight_takeoff,
+                    color: Colors.blue[500],
+                  ),
+                  title: new Text('实验一：启动另一个activity'),
+                  trailing: new Icon(Icons.arrow_right),
+                  onTap: () {
+                    _startSecondActivity();
+                  }),
+              new ListTile(
+                  leading: new Icon(
+                    Icons.flight_takeoff,
+                    color: Colors.blue[500],
+                  ),
+                  title: new Text('实验二：启动动画演示'),
+                  trailing: new Icon(Icons.arrow_right),
+                  onTap: () {
+                    _startAnimation();
+                  }),
+              new ListTile(
+                  leading: new Icon(
                     Icons.exit_to_app,
                     color: Colors.blue[500],
                   ),
@@ -218,6 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     //退出
                     exit(0);
                   }),
+              new AnimatedImg(animation: animation),
             ],
           ),
         ),
@@ -255,5 +293,36 @@ class _MyHomePageState extends State<MyHomePage> {
       list.add(value);
       prefs.setStringList(spKey, list);
     }
+  }
+
+  void _startAnimation() {
+    if (animation.status == AnimationStatus.completed) {
+      controller.reverse();
+    } else if (animation.status == AnimationStatus.dismissed) {
+      controller.forward();
+    }
+  }
+
+  dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+}
+
+class AnimatedImg extends AnimatedWidget {
+  AnimatedImg({Key key, Animation<double> animation})
+      : super(key: key, listenable: animation);
+  @override
+  Widget build(BuildContext context) {
+    final Animation<double> animation = listenable;
+    return new Center(
+      child: new Container(
+        margin: new EdgeInsets.symmetric(vertical: 30.0),
+        height: animation.value,
+        width: animation.value,
+        child: new FlutterLogo(),
+      ),
+    );
   }
 }

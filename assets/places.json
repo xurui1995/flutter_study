@@ -40,7 +40,7 @@
       "name" : "龙虾烧烤城",
       "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
       "rating" : 1.0,
-      "vicinity" : "32 The Promenade, Sydney"
+      "vicinity" : "中国（上海）自由贸易试验区荣科路280号"
     },
     {
 
@@ -117,10 +117,49 @@
     {
 
       "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
-      "name" : "华越楼(汇智店)",
+      "name" : "华越楼",
       "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
       "rating" : 3.8,
       "vicinity" : "金科路3057号汇智商业中心5F（C5-1、C5-2）室"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "蟹虾鱼府(孙桥店)",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 4.3,
+      "vicinity" : " 浦东新区孙桥路112号1-2层"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "致青春食府",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 2.8,
+      "vicinity" : "上海市浦东新区张江镇益江路135弄13号1层104室"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "澳西·达尔牧场",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 4.1,
+      "vicinity" : "上海市浦东新区金科路3057号3FC3 -3"
+    },
+    {
+
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "喜洋洋快餐",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 3.6,
+      "vicinity" : "中国（上海）自由贸易试验区东昌路东园四村427号"
+    },
+    {
+      "id" : "ce4ffe228ab7ad49bb050defe68b3d28cc879c4a",
+      "name" : "沙野轻食",
+      "place_id" : "ChIJjRuIiTiuEmsRCHhYnrWiSok",
+      "rating" : 2.8,
+      "vicinity" : "上海市浦东新区张江镇碧波路635号106-1F08"
     }
   ],
   "status" : "OK"

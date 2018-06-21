@@ -10,16 +10,18 @@ class ItemDetailPage extends StatefulWidget {
 }
 
 class _DetailHomePageState extends State<ItemDetailPage> {
+
+
   @override
   Widget build(BuildContext context) {
     var titleText = new Container(
-      padding: new EdgeInsets.all(20.0),
+      padding: new EdgeInsets.symmetric(vertical: 30.0),
       child: new Text(
-        'Strawberry Pavlova',
+        widget.title,
         style: new TextStyle(
           fontWeight: FontWeight.w800,
           letterSpacing: 0.5,
-          fontSize: 30.0,
+          fontSize: 25.0,
         ),
       ),
     );
@@ -31,7 +33,7 @@ Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlo
       textAlign: TextAlign.center,
       style: new TextStyle(
         fontFamily: 'Georgia',
-        fontSize: 25.0,
+        fontSize: 20.0,
       ),
     );
 
@@ -108,9 +110,9 @@ Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlo
       ),
     );
 
-    var leftColumn = new Container(
-      padding: new EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 20.0),
+    var itemDetail = new Container(
       child: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           titleText,
           subTitle,
@@ -124,10 +126,7 @@ Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlo
         title: new Text(widget.title),
       ),
       body: new Center(
-        child: new Container(
-          margin: new EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 30.0),
-          child: leftColumn,
-        ),
+        child: itemDetail,
       ),
     );
   }
