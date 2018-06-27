@@ -148,14 +148,24 @@ class _MyHomePageState extends State<MyHomePage>
                                   title: new Text(restaurant.name),
                                   subtitle: new Text(restaurant.address),
                                   onTap: () {
-                                    Navigator.of(context).push(
-                                      new MaterialPageRoute(
-                                        builder: (context) {
+                                    Navigator
+                                        .of(context)
+                                        .push(new PageRouteBuilder(pageBuilder:
+                                            (BuildContext context,
+                                                Animation animation,
+                                                Animation secondaryAnimation) {
                                           return new ItemDetailPage(
                                               title: restaurant.name);
-                                        },
-                                      ),
-                                    );
+                                        }, transitionsBuilder:
+                                            (BuildContext context,
+                                                Animation<double> animation,
+                                                Animation<double>
+                                                    secondaryAnimation,
+                                                Widget child) {
+                                          return new SizeTransition(
+                                              sizeFactor: animation,
+                                              child: child);
+                                        }));
                                   },
                                   leading: new CircleAvatar(
                                       child: new Text(
@@ -307,7 +317,6 @@ class _MyHomePageState extends State<MyHomePage>
     controller.dispose();
     super.dispose();
   }
-
 }
 
 class AnimatedImg extends AnimatedWidget {
