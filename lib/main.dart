@@ -47,13 +47,18 @@ class _MyHomePageState extends State<MyHomePage>
   List<Restaurant> _goodRestaurants = <Restaurant>[];
   List<Restaurant> _badRestaurants = <Restaurant>[];
 
+  // 手机型号
   var phone = '';
+
+  // MethodChannel
   static const CHANNEL_PACKAGE =
       const MethodChannel('xur.flutter.io/first_flutter');
 
+  // 动画
   AnimationController controller;
   Animation<double> animation;
 
+  // 获取手机型号
   Future<Null> _getPhoneMsg() async {
     try {
       phone = await CHANNEL_PACKAGE.invokeMethod('getPhoneMsg');
@@ -63,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage>
       print("failed ");
     }
   }
-
+  // 启动新的activity
   Future<Null> _startSecondActivity() async {
     try {
       await CHANNEL_PACKAGE.invokeMethod('startSecondActivity');
@@ -75,15 +80,16 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
-    // _places = new List.generate(100, (i)=>'Restaurant $i');
     _getPhoneMsg();
     listenForPlaces();
 
+    // 动画相关类初始化
     controller = new AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
     animation = new Tween(begin: 20.0, end: 300.0).animate(controller);
   }
 
+  // 加载数据
   void listenForPlaces() async {
     var stream = await getPlaces();
     stream.listen((restaurant) => setState(() => _restaurants.add(restaurant)));
@@ -203,7 +209,6 @@ class _MyHomePageState extends State<MyHomePage>
                   title: new Text('黑名单'),
                   trailing: new Icon(Icons.arrow_right),
                   onTap: () {
-                    Navigator.of(context).pop();
                     Navigator.of(context).push(
                       new MaterialPageRoute(
                         builder: (context) {
@@ -222,7 +227,6 @@ class _MyHomePageState extends State<MyHomePage>
                   title: new Text('好吃的店'),
                   trailing: new Icon(Icons.arrow_right),
                   onTap: () {
-                    Navigator.of(context).pop();
                     Navigator.of(context).push(
                       new MaterialPageRoute(
                         builder: (context) {
